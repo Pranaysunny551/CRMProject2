@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal</title>
+    <link rel="stylesheet" href="style.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body onload="loadPage('home',document.getElementById('homeLink'))">
+    
+    <section id="sidebar">
+        
+        <ul class="side-menu">
+            <li><a href="#" id="homeLink" class="" onclick="loadPage('home', this)">
+                <span class="material-icons-outlined icon">dashboard</span>
+                Dashboard</a></li>
+            <li><a href="#"><span class="material-icons-outlined icon">diversity_3</span>
+                CRM<span class="material-icons-outlined icon-right">chevron_right</span></a>
+                <ul id="dashboardDropdown" class="side-dropdown">
+                    <li><a href="#" class="" onclick="loadPage('crm', this)"><span class="material-icons-sharp icon">dashboard</span>Dashboard</a></li>
+                    <li><a href="#" class="" onclick="loadPage('customers', this)"><span class="material-icons-sharp icon">groups</span>Customers</a></li>
+                    <li><a href="#" class="" onclick="loadPage('feedback', this)"><span class="material-icons-sharp icon">stars</span>Feedbacks</a></li>
+                    <li><a href="#" class="" onclick="loadPage('tasks', this)"><span class="material-icons-sharp icon">task</span>Tasks</a></li>
+                    <li><a href="#" class="" onclick="loadPage('performance', this)"><span class="material-icons-sharp icon">military_tech</span>Performance</a></li>
+                    <li><a href="#" class="" onclick="loadPage('crm-msg', this)"><span class="material-icons-sharp icon">message</span>Messages</a></li>
+                </ul>
+            </li>
+            
+            <li><a style="font-size: 13px;" href="#"><span class="material-icons-outlined icon">storefront</span>
+                Sales & Marketing<span class="material-icons-outlined icon-right">chevron_right</span></a>
+                <ul id="logisticsDropdown" class="side-dropdown">
+                    <li><a href="#" class="" onclick="loadPage('sales-dash', this)"><span class="material-icons-sharp icon">dashboard</span>Dashboard</a></li>
+                    <li><a style="font-size: 14px;" href="#" class="" onclick="loadPage('c-orders', this)"><span class="material-icons-sharp icon">group</span>Customer Orders</a></li>
+                    <li><a href="#" class="" onclick="loadPage('revenue', this)"><span class="material-icons-sharp icon">currency_rupee</span>Revenue</a></li>
+                    <li><a href="#" class="" onclick="loadPage('distributors', this)"><span class="material-icons-sharp icon">groups</span>Distributors</a></li>
+                    <li><a href="#" class="" onclick="loadPage('sales-tasks', this)"><span class="material-icons-sharp icon">task</span>Tasks</a></li>
+                </ul>
+            </li>
+            <li><a style="font-size: 13px;" href="#"><span class="material-icons-outlined icon">inventory</span>
+                Inventory & Supply Chain<span class="material-icons-outlined icon-right">chevron_right</span></a>
+                <ul id="logisticsDropdown" class="side-dropdown">
+                    <li><a href="#" class="" onclick="loadPage('inventory', this)"><span class="material-icons-sharp icon">inventory</span>Inventory</a></li>
+                    <li><a href="#" class="" onclick="loadPage('product-list', this)"><span class="material-icons-sharp icon">category</span>Product List</a></li>
+                    <li><a href="#" class="" onclick="loadPage('stock-in-out', this)"><span class="material-icons-sharp icon">swap_horiz</span>Stock Movement</a></li>
+                    <li><a href="#" class="" onclick="loadPage('suppliers', this)"><span class="material-icons-sharp icon">supervised_user_circle</span>Suppliers</a></li>
+                </ul>  
+            </li>
+            <li><a href="#"><span class="material-icons-outlined icon">warehouse</span>
+                Production<span class="material-icons-outlined icon-right">chevron_right</span></a>
+                <ul id="logisticsDropdown" class="side-dropdown">
+                    <li><a href="#" class="" onclick="loadPage('production-dash', this)"><span class="material-icons-sharp icon">dashboard</span>Dashboard</a></li>
+                    <li><a href="#" class="" onclick="loadPage('production', this)"><span class="material-icons-sharp icon">precision_manufacturing</span>Production</a></li>
+                    <li><a href="#" class="" onclick="loadPage('quality-control', this)"><span class="material-icons-sharp icon">verified_user</span>Quality Control</a></li>
+                    <li><a href="#" class="" onclick="loadPage('production-inventory', this)"><span class="material-icons-sharp icon">inventory</span>Inventory</a></li>
+                    <li><a href="#" class="" onclick="loadPage('investments', this)"><span class="material-icons-sharp icon">volunteer_activism</span>Investments</a></li>
+                    <li><a href="#" class="" onclick="loadPage('production-reports', this)"><span class="material-icons-sharp icon">bar_chart</span>Reports</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span class="material-icons-outlined icon">local_shipping</span>
+                Logistics<span class="material-icons-outlined icon-right">chevron_right</span></a>
+                <ul id="logisticsDropdown" class="side-dropdown">
+                    <li><a href="#" class="" onclick="loadPage('log-dash', this)"><span class="material-icons-sharp icon">dashboard</span>Dashboard</a></li>
+                    <li><a href="#" class="" onclick="loadPage('log-step', this)"><span class="material-icons-sharp icon">delivery_dining</span>Log Steps</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span class="material-icons-outlined icon">description</span>
+                Invoice<span class="material-icons-outlined icon-right">chevron_right</span></a>
+                <ul id="logisticsDropdown" class="side-dropdown">
+                    <li><a href="#" class="" onclick="loadPage('invoice-list', this)"><span class="material-icons-sharp icon">view_list</span>List</a></li>
+                    <li><a href="#" class="" onclick="loadPage('invoice-preview', this)"><span class="material-icons-sharp icon">preview</span>Preview</a></li>
+                    <li><a href="#" class="" onclick="loadPage('invoice-Edit', this)"><span class="material-icons-sharp icon">edit_note</span>Edit</a></li>
+                    <li><a href="#" class="" onclick="loadPage('invoice-Add', this)"><span class="material-icons-sharp icon">post_add</span>Add</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span class="material-icons-outlined icon">person</span>
+                USER<span class="material-icons-outlined icon-right">chevron_right</span></a>
+                <ul id="dashboardDropdown" class="side-dropdown">
+                    <li><a href="#" class="" onclick="loadPage('profile', this)"><span class="material-icons-sharp icon">account_circle</span>Admin Profile</a></li>
+                    <li><a href="#" class="" onclick="loadPage('attendance', this)"><span class="material-icons-sharp icon">check_box</span>Attendance</a></li>
+                    <p class="badge fw-bold mt-3 bg-dark-subtle mb-0 text-dark">Requests</p>
+                    <li><a href="#" class="" onclick="loadPage('salary-comp', this)"><span class="material-icons-sharp icon">work</span>Salary and Compensation</a></li>
+                    <li><a href="#" class="" onclick="loadPage('payslips', this)"><span class="material-icons-sharp icon">text_snippet</span>Payroll Data</a></li>
+                    <li><a href="#" class="" onclick="loadPage('leaves', this)"><span class="material-icons-sharp icon">history_edu</span>Leave and TimeOff</a></li>
+                    <li><a href="#" class="" onclick="loadPage('benefits', this)"><span class="material-icons-sharp icon">health_and_safety</span>Benefits and Incurance</a></li>
+                    <li><a href="#" class="" onclick="loadPage('conflicts', this)"><span class="material-icons-sharp icon">keyboard_double_arrow_right</span>Conflict Resolution</a></li>
+                </ul>
+            </li>
+            <li><a href="#" class="product-btn"><span class="material-icons-outlined icon">category</span>
+                Product<span class="material-icons-outlined icon-right">chevron_right</span></a>
+                <ul id="productDropdown" class="side-dropdown">
+                    <li><a href="#" class="" onclick="loadPage('product-list', this)">Product List</a></li>
+                    <li><a href="#" class="" onclick="loadPage('add-product', this)">Add Product</a></li>
+                    <li><a href="#" class="" onclick="loadPage('product-view', this)">Product Views</a></li>
+                </ul>
+            </li>
+            <li><a href="#" class=""><span class="material-icons-outlined icon">shopping_cart</span>
+                Orders<span class="material-icons-outlined icon-right">chevron_right</span></a>
+                <ul class="side-dropdown">
+                    <li><a href="#" class="" onclick="loadPage('orders-list', this)">Customer Orders</a></li>
+                    <li><a href="#" class="" onclick="loadPage('orders-status', this)">Orders Status</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="#" class=""><span class="material-icons-outlined icon">chat</span>
+                Messages<span class="material-icons-outlined icon-right">chevron_right</span></a>
+                <ul class="side-dropdown">
+                    <li><a href="#" class="" onclick="loadPage('messages', this)">Customers Chats</a></li>
+                    <li><a href="#" class="" onclick="loadPage('v-messages', this)">Venders Chats</a></li>
+                </ul>
+            </li>
+            <li><a href="#" class="arrow"><span class="material-icons-outlined icon">notifications</span>
+                Notification<span class="material-icons-outlined icon-right">chevron_right</span></a>
+                <ul class="side-dropdown">
+                    <li><a href="#" class="" onclick="loadPage('alerts', this)">Alerts</a></li>
+                    <li><a href="#" class="" onclick="loadPage('warnings', this)">Warnings</a></li>
+                </ul>
+            </li>
+            <li><a href="#" class=""><span class="material-icons-outlined icon">groups</span>
+                Customers<span class="material-icons-outlined icon-right">chevron_right</span></a>
+                <ul class="side-dropdown">
+                    <li><a href="" class="" onclick="loadPage('regular-c', this)">Regular</a></li>
+                    <li><a href="" class="" onclick="loadPage('bulk-c', this)">Bulk</a></li>
+                    <li><a href="" class="" onclick="loadPage('retail-c', this)">Retail</a></li>
+                </ul>
+            </li>
+            <li><a href="#" class="" onclick="loadPage('reports', this)"><span class="material-icons-outlined icon">report</span>Report</a></li>
+            <li><a href="#" class=""><span class="material-icons-outlined icon">analytics</span>
+                Analytics<span class="material-icons-outlined icon-right">chevron_right</span></a>
+                <ul class="side-dropdown">
+                    <li><a href="">Regular</a></li>
+                    <li><a href="">Bulk</a></li>
+                    <li><a href="">Retail</a></li>
+                </ul>
+            </li>
+            <li><a href="#" class="" onclick="loadPage('logout', this)"><span class="material-icons-outlined icon">logout</span>Logout</a></li>
+
+        </ul>
+    </section>
+
+
+    <section id="content">
+        <nav class="col-md-12">
+            <div class="logo">
+                <img src="./images/ATS-BG.png" alt=""> 
+            </div>
+            <div class="nav-link">
+                <span class="material-icons-outlined toggle-sidebar fs-3 mx-3">menu</span>
+            </div>
+           
+            <form action="#">
+                <div class="form-group">
+                    <input type="text" placeholder="Search...">
+                    <span class="material-icons-outlined icon">search</span>
+                </div>
+            </form>
+            
+            <a href="#" class="nav-link " href="#" id="darkModeDropdown" role="button" data-bs-toggle="dropdown">
+                <span class="material-icons-outlined light-mode fs-3">light_mode</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end bg-primary-subtle" aria-labelledby="darkModeDropdown">
+                <h6 class="dropdown-header">Theme Settings</h6>
+                <a class="dropdown-item" href="#" data-bs-theme-value="light">
+                    <i class="bi bi-sun-fill me-2"></i>Light Mode
+                </a>
+                <a class="dropdown-item" href="#" data-bs-theme-value="dark">
+                    <i class="bi bi-moon-stars-fill me-2"></i>Dark Mode
+                </a>
+                <a class="dropdown-item" href="#" data-bs-theme-value="auto">
+                    <i class="bi bi-circle-half me-2"></i>System Preference
+                </a>
+            </div>
+            
+            
+            <a href="#" class="nav-link" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown">
+                <span class="material-icons-outlined language fs-3">language</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end bg-primary-subtle" aria-labelledby="languageDropdown">
+                <h6 class="dropdown-header" 
+                    data-en="Select Language" 
+                    data-fr="Choisir la langue"
+                    data-es="Seleccionar idioma"
+                    data-de="Sprache auswählen"
+                    data-ja="言語を選択">Select Language</h6>
+                <a class="dropdown-item language-option" href="#" data-lang="en">
+                    <img src="https://flagcdn.com/w20/gb.png" class="flag-icon" alt="English">
+                    <span data-en="English" 
+                          data-fr="Anglais"
+                          data-es="Inglés"
+                          data-de="Englisch"
+                          data-ja="英語">English</span>
+                </a>
+                <a class="dropdown-item language-option" href="#" data-lang="fr">
+                    <img src="https://flagcdn.com/w20/fr.png" class="flag-icon" alt="French">
+                    <span data-en="French" 
+                          data-fr="Français"
+                          data-es="Francés"
+                          data-de="Französisch"
+                          data-ja="フランス語">French</span>
+                </a>
+                <a class="dropdown-item language-option" href="#" data-lang="es">
+                    <img src="https://flagcdn.com/w20/es.png" class="flag-icon" alt="Spanish">
+                    <span data-en="Spanish" 
+                          data-fr="Espagnol"
+                          data-es="Español"
+                          data-de="Spanisch"
+                          data-ja="スペイン語">Spanish</span>
+                </a>
+                <a class="dropdown-item language-option" href="#" data-lang="de">
+                    <img src="https://flagcdn.com/w20/de.png" class="flag-icon" alt="German">
+                    <span data-en="German" 
+                          data-fr="Allemand"
+                          data-es="Alemán"
+                          data-de="Deutsch"
+                          data-ja="ドイツ語">German</span>
+                </a>
+                <a class="dropdown-item language-option" href="#" data-lang="ja">
+                    <img src="https://flagcdn.com/w20/jp.png" class="flag-icon" alt="Japanese">
+                    <span data-en="Japanese" 
+                          data-fr="Japonais"
+                          data-es="Japonés"
+                          data-de="Japanisch"
+                          data-ja="日本語">Japanese</span>
+                </a>
+            </div>
+            <a href="#" class="nav-link" href="#" id="mailDropdown" role="button" data-bs-toggle="dropdown">
+                <span class="material-icons-outlined mail-icon fs-3">mail_outline</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end p-0 border rounded-2 shadow" aria-labelledby="mailDropdown" style="width: 300px; border: none;">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item bg-primary-subtle">
+                        <h6 class="mb-0">Messages (3)</h6>
+                    </div>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <strong>Vara Prasadh</strong>
+                            <small>10 min ago</small>
+                        </div>
+                        <p class="mb-1">Meeting at 2pm tomorrow</p>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <strong>Support Team</strong>
+                            <small>1 hour ago</small>
+                        </div>
+                        <p class="mb-1">Your ticket has been resolved</p>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <strong>Newsletter</strong>
+                            <small>3 hours ago</small>
+                        </div>
+                        <p class="mb-1">Monthly updates</p>
+                    </a>
+                    <div class="list-group-item text-center bg-primary-subtle">
+                        <a href="#" class="text-primary text-decoration-none fw-medium">View all messages</a>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" class="nav-link" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown">
+                <span class="material-icons-outlined notification-icon fs-3">notifications</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end p-0 border rounded-2 shadow" aria-labelledby="notifDropdown" style="width: 300px; border-radius: 10px; border: none;">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item bg-primary-subtle">
+                        <h6 class="mb-0">Notifications (5)</h6>
+                    </div>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 text-success">
+                                <i class="bi bi-check-circle-fill"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <p class="mb-0 fw-medium">Your profile has been updated</p>
+                                <small class="text-muted">Just now</small>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 text-primary">
+                                <i class="bi bi-info-circle-fill"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <p class="mb-0 fw-medium">New feature available</p>
+                                <small class="text-muted">2 hours ago</small>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 text-warning">
+                                <i class="bi bi-exclamation-triangle-fill"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <p class="mb-0 fw-medium">Security alert</p>
+                                <small class="text-muted">Yesterday</small>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="list-group-item text-center bg-primary-subtle">
+                        <a href="#" class="text-primary text-decoration-none fw-medium">View all notifications</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile">
+                <div class="card shadow p-3 user-info d-flex flex-row justify-content-center align-items-center">
+                    <div>
+                        <img class="image" src="./images/Admin.jpg" alt="Admin Profile" class="dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                        <div class="active-mark"></div>
+                    </div>
+                    <h6 class="mt-2">Srikanth</h6>
+                    <span class="material-icons-outlined">expand_more</span>
+                </div>
+                <ul class="profile-link">
+                    <li><a href="#" onclick="loadProfile('profile', this)"><span class="material-icons-outlined">person</span>Profile</a></li>
+                    <li><a href=""><span class="material-icons-outlined">settings</span>Settings</a></li>
+                    <li><a href=""><span class="material-icons-outlined">logout</span>Logout</a></li>
+                </ul>    
+            </div> 
+        </nav>
+    </section>
+    <main>
+        <div id="main-content">
+            
+        </div>
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Product Details</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex">
+                            <img src="./images/dodla-sd-milk.png" alt="" width="250px" height="250px">
+                            <div class=" ml-2 data">
+                                <h4>DODLA</h4>
+                                <h5>Standardised Milk</h5>
+                                <h6>⭐⭐⭐⭐⭐</h6>
+                                <p class="fs-6">Hygienically sourced fresh milk directly from farmers reach our chilling centres then processed and packaged in our dairy plants. Dodla Milk reaches your home pure and untouched by hand.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-close-white text-danger fw-medium" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Product Details</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex">
+                            <img src="./images/dodla-curd.png" alt="" width="250px" height="250px">
+                            <div class=" ml-2 data">
+                                <h4>DODLA</h4>
+                                <h5>Thick Curd</h5>
+                                <h6>⭐⭐⭐⭐⭐</h6>
+                                <p class="fs-6">Hygienically sourced fresh milk directly from farmers reach our chilling centres then processed and packaged in our dairy plants. Dodla Milk reaches your home pure and untouched by hand.</p>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-close-white text-danger fw-medium" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header bg-success-subtle">
+                  <h5 class="modal-title" id="addProductModalLabel">Add New Product to Inventory</h5>
+                  <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="addProductForm">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="mb-3">
+                          <label for="productName" class="form-label">Product Name*</label>
+                          <input type="text" class="form-control" id="productName" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                          <label for="productCategory" class="form-label">Category*</label>
+                          <select class="form-select" id="productCategory" required>
+                            <option value="">Select Category</option>
+                            <option>Milk Products</option>
+                            <option>Curd</option>
+                            <option>Ghee</option>
+                            <option>Paneer</option>
+                          </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                          <label for="quantity" class="form-label">Quantity*</label>
+                          <input type="number" class="form-control" id="quantity" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                          <label for="unit" class="form-label">Unit*</label>
+                          <select class="form-select" id="unit" required>
+                            <option value="">Select Unit</option>
+                            <option>Liters</option>
+                            <option>Kg</option>
+                            <option>Packs</option>
+                            <option>Boxes</option>
+                            <option>Bottles</option>
+                            <option>Bags</option>
+                          </select>
+                        </div>
+                      </div>
+                      
+                      <div class="col-md-6">
+                        <div class="mb-3">
+                          <label for="batchNumber" class="form-label">Batch Number*</label>
+                          <input type="text" class="form-control" id="batchNumber" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                          <label for="productionDate" class="form-label">Production Date*</label>
+                          <input type="date" class="form-control" id="productionDate" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                          <label for="expiryDate" class="form-label">Expiry Date*</label>
+                          <input type="date" class="form-control" id="expiryDate" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                          <label for="storageLocation" class="form-label">Storage Location*</label>
+                          <select class="form-select" id="storageLocation" required>
+                            <option value="">Select Location</option>
+                            <option>Cold Storage 1</option>
+                            <option>Cold Storage 2</option>
+                            <option>Warehouse A</option>
+                            <option>Warehouse B</option>
+                            <option>Processing Area</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                      <label for="productNotes" class="form-label">Additional Notes</label>
+                      <textarea class="form-control" id="productNotes" rows="2"></textarea>
+                    </div>
+                    
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" type="checkbox" id="requiresRefrigeration">
+                      <label class="form-check-label" for="requiresRefrigeration">
+                        Requires Refrigeration
+                      </label>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn bg-secondary-subtle" data-bs-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn bg-success-subtle" id="submitProduct">Add to Inventory</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts.js"></script>
+    <script src="index.js"></script>
+    <script src="./pages/home.js"></script>
+    <script src="./pages/crm.js"></script>
+    <script src="./pages/customers.js"></script>
+    <script src="./pages/feedback.js"></script>
+    <script src="./pages/performance.js"></script>
+    <script src="./pages/messages.js"></script>
+    <script src="./pages/saleDash.js"></script>
+    <script src="./pages/revenue.js"></script>
+    <script src="./pages/salesTasks.js"></script>
+    <script src="./pages/reminder.js"></script>
+    <script src="./pages/fbCollection.js"></script>
+    <script src="./pages/c-Complaints.js"></script>
+    <script src="./pages/complaintDetails.js"></script>
+    <script src="./pages/c-Inquiries.js"></script>
+    <script src="./pages/inquiryDetails.js"></script>
+    <script src="./pages/distributors.js"></script>
+    <script src="./pages/distributorView.js"></script>
+    <script src="./pages/distributorsList.js"></script>
+    <script src="./pages/suppliersList.js"></script>
+    <script src="./pages/suppliersDetails.js"></script>
+    <script src="./pages/inventory.js"></script>
+    <script src="./pages/stokeMovement.js"></script>
+    <script src="./pages/invoiceList.js"></script>
+    <script src="./pages/invoicePreview.js"></script>
+    <script src="./pages/productionDash.js"></script>
+    <script src="./pages/production.js"></script>
+    <script src="./pages/milkProduction.js"></script>
+    <script src="./pages/curdProduction.js"></script>
+    <script src="./pages/gheeProduction.js"></script>
+    <script src="./pages/paneerProduction.js"></script>
+    <script src="./pages/qualityControl.js"></script>
+    <script src="./pages/mainInventory.js"></script>
+    <script src="./pages/liveStock.js"></script>
+    <script src="./pages/investments.js"></script>
+    <script src="./pages/attendance.js"></script>
+    <script src="./pages/calendar.js"></script>
+    <script src="./pages/tasks.js"></script>
+    <script src="./pages/benfits.js"></script>
+    <script src="./pages/salary-comp.js"></script>
+    <script src="./pages/leaves.js"></script>
+    <script src="./pages/payslips.js"></script>
+    <script src="./pages/hrm.js"></script>
+    <script src="./pages/addProduct.js"></script>
+    <script src="./pages/profile.js"></script>
+    <script src="./pages/logisticsDash.js"></script>
+    <script src="./pages/logStep.js"></script>
+    <script src="./pages/productList.js"></script>
+    <script src="./pages/addProduct.js"></script>
+    <script src="./pages/cOrders.js"></script> 
+    <script src="./pages/orderList.js"></script>
+</body>
+</html>
